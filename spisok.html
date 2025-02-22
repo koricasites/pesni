@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spisok</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --card-color: #2d2d2d;
+            --accent: #ffbb00;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 2.5rem;
+            color: #fff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .song-card {
+            background: var(--card-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: space-between
+        }
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .song-link {
+            color: #fff;
+            text-decoration: none;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .song-link.played {
+            color: var(--accent);
+        }
+
+        button {
+            background: #3d3d3d;
+            color: #fff;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 10px;
+            text-align: center;
+            display: flex;
+            font-size: 20px;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        a.played {
+            color: #28a745;
+        }
+
+        button:hover {
+            background: var(--accent);
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            body {
+                padding: 1rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .song-card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        svg {
+            height: 100%;
+            width: 100%;
+        }
+
+        button {
+            height: 47px;
+        }
+
+        .mark {
+            width: fit-content;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .open {
+            margin-right: 10px;
+        }
+
+        .open:hover {
+            background-color: #ab3cff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Список песен</h1>
+    <div class="grid">
+        <div class="song-card">
+            <a class="song-link" href="song1.html">Хочешь?</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song1.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song2.html">Вино и сигареты</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song2.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song3.html">Ты бы охуела</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song3.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song4.html">Все мои друзья</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song4.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song5.html">Мальчики не плачут</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song5.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song6.html">Да или…</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song6.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song7.html">Ты не такая</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song7.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song8.html">Криворукие</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song8.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song9.html">Нервы</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song9.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song10.html">Супермаркет</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song10.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song11.html">Муза</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song11.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song12.html">Спать с тобой</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song12.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song13.html">Рустем</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song13.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song14.html">Demons</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song14.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song15.html">Бесполезно</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song15.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song16.html">День, когда мы встретились с тобой</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song16.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song17.html">Батареи</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song17.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song18.html">Наше лето</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song18.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song19.html">Вороны</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song19.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song20.html">Sweater Weather</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song20.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song21.html">Счастье</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song21.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song22.html">Дешевые драмы</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song22.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song23.html">Вечно 17</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song23.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song24.html">Спи спокойно</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song24.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song25.html">Динозаврики</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song25.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song26.html">Я не хочу без тебя спать</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song26.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song27.html">Школа</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song27.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song28.html">Мою первую любовь звали ненависть</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song28.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song29.html">Наверное я слишком влюблен</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song29.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song30.html">Космос нас ждет</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song30.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song31.html">Мемы</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song31.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song32.html">Гори твое фото</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song32.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song33.html">Riptide</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song33.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song34.html">Mr. Forgettable</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song34.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song35.html">Две девочки</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song35.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song36.html">Я удалю тебя из друзей</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song36.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song37.html">Ее имя</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song37.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song38.html">Home</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song38.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song39.html">Глупая</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song39.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="song-card">
+            <a class="song-link" href="song40.html">Выбор за Кариной и Алиной</a>
+            <div class="buttons">
+                <button class="open" onclick="markAsPlayed(this), window.location.href='song40.html'">Открыть</button>
+                <button class="mark" onclick="markAsPlayed(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e8eaed">
+                        <path
+                            d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function markAsPlayed(button) {
+            const songCard = button.closest('.song-card');
+            const songLink = songCard.querySelector('.song-link');
+            const isPlayed = songLink.classList.toggle('played');
+
+            // Add animation
+            if (isPlayed) {
+                songCard.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    songCard.style.transform = '';
+                }, 300);
+            }
+
+            // Save to localStorage
+            const songHref = songLink.getAttribute('href');
+            const playedSongs = JSON.parse(localStorage.getItem('playedSongs') || '{}');
+            playedSongs[songHref] = isPlayed;
+            localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const playedSongs = JSON.parse(localStorage.getItem('playedSongs') || '{}');
+            document.querySelectorAll('.song-link').forEach(link => {
+                const songHref = link.getAttribute('href');
+                if (playedSongs[songHref]) link.classList.add('played');
+            });
+
+            // Add staggered animations
+            document.querySelectorAll('.song-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
+            });
+        });
+    </script>
+</body>
+
+</html>
